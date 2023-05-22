@@ -190,3 +190,10 @@ nav ul li a::before{
 nav ul li a:hover::before{
     height: 85px;
 }
+
+.btn btn-success{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    
+}

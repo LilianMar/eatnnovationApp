@@ -133,19 +133,47 @@ def registro(request):
     return render(request, 'registration/registro.html', data)
 
 
-def order_confirmation(request):
+def select_products(request):
     if request.method == 'POST':
+        selected_products = []
         total_quantity = int(request.POST.get('total_quantity', 0))
-        products = []
         
         for i in range(1, total_quantity + 1):
             product_id = request.POST.get(f'product_id_{i}')
             quantity = int(request.POST.get(f'quantity_{i}', 0))
             
-            product = Product.objects.get(id=product_id)
-
-            products.append({'product': product, 'quantity': quantity})
+            if product_id and quantity > 0:
+                product = Product.objects.get(id=product_id)
+                selected_products.append({'product': product, 'quantity': quantity})
         
-        total_amount = sum(product['product'].price * product['quantity'] for product in products)
+        context = {
+            'selected_products': selected_products,
+            'user': request.user,
+        }
+        return render(request, 'eatnnovationApp/order_confirmation.html', context)
+    else:
+        products = Product.objects.all()
+        context = {'object_list': products}
+        return render(request, 'eatnnovationApp/orders.html', context)
 
-        return render(request, 'eatnnovationApp/order_confirmation.html', {'products': products, 'total_amount': total_amount})
+def order_confirmation(request):
+    if request.method == 'POST':
+        selected_products = []
+        total_amount = 0
+
+        for i, (product_id, quantity) in enumerate(request.POST.items()):
+            if product_id.startswith('quantity_') and quantity.isdigit():
+                product_id = product_id.split('_')[1]
+                product = Product.objects.get(id=product_id)
+                quantity = int(quantity)
+                subtotal = product.price * quantity
+                total_amount += subtotal
+                selected_products.append({'product': product, 'quantity': quantity, 'subtotal': subtotal})
+
+        context = {
+            'products': selected_products,
+            'total_amount': total_amount,
+        }
+        return render(request, 'eatnnovationApp/order_confirmation.html', context)
+    else:
+        return redirect('select_products')

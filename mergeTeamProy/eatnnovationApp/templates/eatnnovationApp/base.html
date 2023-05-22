@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'eatnnovationApp/css/styles.css' %}">
+    <title>Eatnnovation</title>
+    
+</head> 
+<body>
+    <div class="hero">
+
+        <nav>
+           
+            <img src="{% static 'eatnnovationApp/img/logo.png' %}" class="logo"  >
+            
+
+            <ul>
+                <li><a href="{% url 'productList' %}">Products</a></li>
+                <li><a href="">Users</a></li>
+                <li><a href="{% url 'menu' %}">Menu</a></li>   
+                {% if user.is_authenticated %}  
+                <li>
+                  <a href="{% url 'logout' %}">Logout</a>
+                </li>
+                <li> 
+                    <a href="#">@{{user.username}} </a>
+                </li>
+                {% else %} 
+                <li>
+                    <a href="{% url 'login' %}">Login</a>
+                  </li>
+                {% endif %}
+            </ul>
+            <a href="{% url 'home' %}"> <img src="{% static 'eatnnovationApp/img/home.png' %}" class="menu-img" >
+            </a>
+            
+            
+        </nav>
+        
+        <div id="contenido">
+
+            {% block contenido %}
+    
+            {% endblock %}
+            
+    
+        </div>
+
+        </div>
+
+
+    </div>
+    
+</body>
+
+<footer>
+    <p> Lilian Estefania Maradiago, Nicolas Gonzales y Camilo Roman Castiblanco</p>
+</footer>
+
+</html>

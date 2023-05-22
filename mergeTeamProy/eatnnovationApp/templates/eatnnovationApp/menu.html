@@ -1,0 +1,53 @@
+{% extends 'eatnnovationApp/base.html' %}
+{# Cargamos la librería #}
+  {% load bootstrap4 %}
+
+  {# CSS Bootstrap #}
+  {% bootstrap_css %} </head>
+
+{# Archivos #}
+{% load static %}
+
+{% block contenido %}
+<h2>MENU</h2>
+
+ 
+
+  <div class="contenedor">
+    
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th width="15%">Name</th>
+          <th width="15%">Category</th>
+          <th witdh="35">Description</th>
+          <th>Price</th>
+          <th>Image</th>
+          <th>Available</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+
+        <!-- Recorremos los objetos o registros que tenemos en nuestra tabla 'products' y los listamos -->
+        {% for products in object_list %}
+        <tr>
+          <td>{{ products.name }}</td>
+          <td>{{ products.category }}</td>
+          <td>{{ products.description }}</td>
+          <td>{{ products.price }}</td>
+          {% if products.img %}
+          <td><img src="{{products.img.url}}" alt="{{products.name}}" class="img-fluid" width="50%">
+          {% endif %}  
+          </td>
+          <td>{{ products.availableCant }}</td>
+          
+        </tr>
+        {% endfor %}
+
+      </tbody>
+    </table>
+    {# JS y jQuery Bootstrap #}
+    {% bootstrap_javascript jquery='full' %}
+
+{% endblock %}

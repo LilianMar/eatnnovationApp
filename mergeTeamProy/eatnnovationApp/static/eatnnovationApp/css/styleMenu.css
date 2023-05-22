@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: 'Lexend', sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+    background-color: white;
+}
+.container{
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.menus-area {
+  position: relative;
+  z-index: 2;
+  padding: 100px 0;
+  color: #fff;
+}
+.menus-area:before {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: .95;
+  left: 0;
+  top: 0;
+}
+.section-title {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  .section-title h4 {
+    font-size: 40px;
+    text-transform: uppercase;
+    line-height: 60px;
+  }
+  .menus {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  .menu-items {
+    flex-basis: 30%; 
+    max-width: 30%; 
+  }
+  .title {
+    background-color: #d9f688;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 24px;
+    text-transform: capitalize;
+    margin-bottom: 30px;
+  }
+  .single-menu {
+    background-color: #333;
+    border: 1px solid #807f7f;
+    padding: 25px;
+    text-align: center;
+    position: relative;
+    transition: .3s;
+    margin-bottom: 30px;
+  }
+  .single-menu span {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    background-color: #d9f688;
+    padding: 8px 20px;
+    font-size: 20px;
+    font-weight: 700;
+    border-radius: 15px 0 0 0;
+  }
+  .single-menu img {
+    max-width: 80px;
+    border: 1px solid #807f7f;
+    padding: 3px;
+    transition: .3s;
+  }
+  .single-menu h4 {
+    border-bottom: 1px dashed black;
+    margin: 10px 0;
+    padding-bottom: 10px;
+    text-transform: capitalize;
+    font-size: 24px;
+  }
+  .single-menu a {
+  display: inline-block;
+  color: #d9f688;
+  text-transform: uppercase;
+  margin-top: 25px;
+}
+.single-menu:hover img {
+    border-radius: 50%;
+  }
+  .single-menu:hover {
+    border-color: #d9f688;
+    border-radius: 7px;
+  }
+  
+ 

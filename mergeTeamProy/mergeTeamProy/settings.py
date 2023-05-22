@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'widget_tweaks',
     'colorfield',
+    'django.contrib.humanize'
 ]
 
 X_FRAM_OPTIONS='SAMEORIGIN'

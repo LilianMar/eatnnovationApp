@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'eatnnovationApp/css/styles.css' %}">
+    <title>Registro</title>
+    <style>
+        .hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            max-width: 300px;
+            border: 2px solid #d9f688;
+            border-radius: 8px;
+            padding: 20px;
+            box-sizing: border-box;
+            margin-top: 20px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .btn-crear {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .btn-crear input[type="submit"],
+        .btn-crear a {
+            padding: 10px 20px;
+            border-radius: 30px;
+            border: #000;
+            background: #d9f688;
+            display: inline-block;
+            color: #000;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 5px 8px 10px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+        }
+
+        .btn-crear input[type="submit"]:hover {
+            background: #c5e84f;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="hero">
+        <nav>
+            <img src="{% static 'eatnnovationApp/img/logo.png' %}" class="logo">
+
+            <ul>
+                <li><a href="{% url 'menu' %}">Menu</a></li>
+                {% if user.is_authenticated %}
+                <li>
+                    <a href="{% url 'logout' %}">Logout</a>
+                </li>
+                <li>
+                    <a href="#">@{{user.username}} </a>
+                </li>
+                {% else %}
+                <li>
+                    <a href="{% url 'login' %}">Login</a>
+                </li>
+                {% endif %}
+            </ul>
+            <a href="{% url 'home' %}"> <img src="{% static 'eatnnovationApp/img/home.png' %}" class="menu-img">
+            </a>
+        </nav>
+
+        <div class="container">
+            <div class="card">
+                <div class="card-body">
+                    <h2>Registro de Usuario</h2>
+                    <hr>
+                    {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                            {% endfor %}
+                    </ul>
+                    {% endif %}
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="{{ form.username.id_for_label }}">Nombre de usuario:</label>
+                                    {{ form.username }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="{{ form.password1.id_for_label }}">Contraseña:</label>
+                                    {{ form.password1 }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="{{ form.password2.id_for_label }}">Confirmar contraseña:</label>
+                                    {{ form.password2 }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="btn-crear">
+                            <input type="submit" value="Registrar">
+                            <a href="{% url 'login' %}">Volver</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

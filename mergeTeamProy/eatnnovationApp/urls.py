@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import home, Menu, registro
+from .views import home, Menu, registro, SaveOrderView, OrderConfirmationView
 from  eatnnovationApp.views import ProductCreate,ProductDelete,ProductDetail,ProductList,ProductUpdate
 
 
@@ -19,4 +19,10 @@ urlpatterns = [
     path('productList/delete/<int:pk>', ProductDelete.as_view(), name='deleteProduct'),
 
     path('registro/', registro, name='registro'),
+    path('orders/', Menu.as_view(template_name = "eatnnovationApp/orders.html"), name='orders'),
+    path('factura/', SaveOrderView.as_view(), name='factura'),
+    path('order_confirmation/', OrderConfirmationView.as_view(), name='order_confirmation'),
+
+
+
 ]

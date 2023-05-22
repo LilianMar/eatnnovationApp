@@ -1,0 +1,36 @@
+{% extends 'eatnnovationApp/base.html' %}
+
+{% load static %}
+{% load humanize %}
+
+{% block contenido %}
+
+<h2>Order Confirmation</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Unit Price</th>
+            <th>Subtotal</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in selected_products %}
+        <tr>
+            <td>{{ item.product.name }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>${{ item.product.price }}</td>
+            <td>${{ item.subtotal | intcomma }}</td>
+
+        </tr>
+        {% endfor %}
+        <tr>
+            <td colspan="3" style="text-align: right;"><strong>Total:</strong></td>
+            <td><strong>${{ total_amount }}</strong></td>
+        </tr>
+    </tbody>
+</table>
+
+{% endblock %}

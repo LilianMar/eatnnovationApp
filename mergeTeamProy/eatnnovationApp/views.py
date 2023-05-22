@@ -10,6 +10,8 @@ from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth import authenticate, login
 from .forms import CustomUserCreationForm
+from django.views import View
+from django.http import HttpResponseRedirect
 
 
 # Create your views here.
@@ -78,4 +80,51 @@ def registro(request):
 
 
     return render(request, 'registration/registro.html', data)
+
+class SaveOrderView(View):
+    def post(self, request):
+        selected_products = []
+        total_amount = 0
+
+        for product in Product.objects.all():
+            quantity = request.POST.get(f'quantity_{product.id}')
+            if quantity:
+                quantity = int(quantity)
+                if quantity > 0 and quantity <= product.availableCant:
+                    selected_products.append({
+                        'product': product,
+                        'quantity': quantity
+                    })
+                    total_amount += product.price * quantity
+
+        product_ids = [str(item['product'].id) for item in selected_products]
+        quantities = [str(item['quantity']) for item in selected_products]
+
+        url = reverse('order_confirmation', args=[','.join(product_ids), ','.join(quantities)])
+        return HttpResponseRedirect(url)
     
+class OrderConfirmationView(View):
+    def get(self, request, *args, **kwargs):
+        product_ids = self.request.GET.getlist('product_ids')
+        quantities = self.request.GET.getlist('quantities')
+
+        selected_products = []
+        total_amount = 0
+
+        for product_id, quantity in zip(product_ids, quantities):
+            product = Product.objects.get(id=product_id)
+            quantity = int(quantity)
+            selected_products.append({
+                'product': product,
+                'quantity': quantity,
+                'subtotal': product.price * quantity
+            })
+            total_amount += product.price * quantity
+
+        context = {
+            'selected_products': selected_products,
+            'total_amount': total_amount
+        }
+
+        return render(request, 'eatnnovationApp/order_confirmation.html', context)
+

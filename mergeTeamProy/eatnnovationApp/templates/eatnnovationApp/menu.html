@@ -1,9 +1,9 @@
 {% extends 'eatnnovationApp/base.html' %}
 {# Cargamos la librería #}
-  {% load bootstrap4 %}
+{% load bootstrap4 %}
 
-  {# CSS Bootstrap #}
-  {% bootstrap_css %} 
+{# CSS Bootstrap #}
+{% bootstrap_css %}
 
 {# Archivos #}
 {% load static %}
@@ -11,47 +11,77 @@
 {% load humanize %}
 
 {% block contenido %}
+
 <head>
   <link rel="stylesheet" type="text/css" href="{% static 'eatnnovationApp/css/styleMenu.css' %}">
+  <style>
+    .btn-crear {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .btn-crear input[type="submit"],
+    .btn-crear a {
+      padding: 10px 20px;
+      border-radius: 30px;
+      border: #000;
+      background: #d9f688;
+      display: inline-block;
+      color: #000;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 5px 8px 10px rgba(0, 0, 0, 0.1);
+      text-decoration: none;
+    }
+
+    .btn-crear input[type="submit"]:hover {
+      background: #c5e84f;
+    }
+  </style>
 </head>
 
 <h2>MENU</h2>
 
-  <div class="contenedor">
-    
-    <table class="table table-striped table-hover">
-      <thead>
-        <tr>
-          <th width="15%">Name</th>
-          <th width="15%">Category</th>
-          <th witdh="35">Description</th>
-          <th>Price</th>
-          <th>Image</th>
-          <th>Available</th>
-          
-        </tr>
-      </thead>
-      <tbody>
+<div class="contenedor">
 
-        <!-- Recorremos los objetos o registros que tenemos en nuestra tabla 'products' y los listamos -->
-        {% for products in object_list %}
-        <tr>
-          <td>{{ products.name | title }}</td>
-          <td>{{ products.category }}</td>
-          <td>{{ products.description | capfirst }}</td>
-          <td>${{ products.price | intcomma }}</td>
-          {% if products.img %}
-          <td><img src="{{products.img.url}}" alt="{{products.name}}" class="img-fluid" width="50%">
-          {% endif %}  
-          </td>
-          <td>{{ products.availableCant }}</td>
-          
-        </tr>
-        {% endfor %}
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th width="15%">Name</th>
+        <th width="15%">Category</th>
+        <th witdh="35">Description</th>
+        <th>Price</th>
+        <th>Image</th>
+        <th>Available</th>
 
-      </tbody>
-    </table>
-    {# JS y jQuery Bootstrap #}
-    {% bootstrap_javascript jquery='full' %}
+      </tr>
+    </thead>
+    <tbody>
+
+      <!-- Recorremos los objetos o registros que tenemos en nuestra tabla 'products' y los listamos -->
+      {% for products in object_list %}
+      <tr>
+        <td>{{ products.name | title }}</td>
+        <td>{{ products.category }}</td>
+        <td>{{ products.description | capfirst }}</td>
+        <td>${{ products.price | intcomma }}</td>
+        {% if products.img %}
+        <td><img src="{{products.img.url}}" alt="{{products.name}}" class="img-fluid" width="40%">
+          {% endif %}
+        </td>
+        <td>{{ products.availableCant }}</td>
+
+      </tr>
+      {% endfor %}
+
+    </tbody>
+  </table>
+</div>
+<div class="btn-crear">
+  <a href="{% url 'orders' %}">Order now!</a>
+</div>
+
+{# JS y jQuery Bootstrap #}
+{% bootstrap_javascript jquery='full' %}
 
 {% endblock %}

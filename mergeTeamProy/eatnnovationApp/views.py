@@ -15,8 +15,8 @@ def home (request):
 
     return render(request, 'eatnnovationApp/home.html')
 
-def menu (request):
-    return render(request, 'eatnnovationApp/menu.html')
+class Menu (ListView):
+    model = Product 
 
 
 class ProductList(ListView):
@@ -30,7 +30,7 @@ class ProductCreate(SuccessMessageMixin, CreateView):
 
     # Redireccionamos a la página principal luego de crear un registro o Product
     def get_success_url(self):        
-        return reverse('readProduct') # revisar la pagina a la que se va a redireccionar User 
+        return reverse('productList') # revisar la pagina a la que se va a redireccionar User 
       
 class ProductDetail(DetailView): 
     model = Product # Llamamos a la clase 'Product' que se encuentra en nuestro archivo 'models.py' 
@@ -43,7 +43,7 @@ class ProductUpdate(SuccessMessageMixin, UpdateView):
 
     # Redireccionamos a la página principal luego de actualizar un registro o Product
     def get_success_url(self):               
-        return reverse('readProduct') # Redireccionamos a la vista principal 'leer'
+        return reverse('productList') # Redireccionamos a la vista principal 'leer'
 
 class ProductDelete(SuccessMessageMixin, DeleteView): 
     model = Product 
@@ -54,5 +54,5 @@ class ProductDelete(SuccessMessageMixin, DeleteView):
     def get_success_url(self): 
         success_message = 'Product deleted Succesfully !' # Mostramos este Mensaje luego de Editar un Product 
         messages.success (self.request, (success_message))       
-        return reverse('readProduct') # Redireccionamos a la vista principal 'leer'  
+        return reverse('productList') # Redireccionamos a la vista principal 'leer'  
     

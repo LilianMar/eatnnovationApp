@@ -1,6 +1,6 @@
 <head>
   
-  {% extends 'eatnnovationApp/base.html' %}
+
   {# Cargamos la librería #}
   {% load bootstrap4 %}
 
@@ -9,87 +9,51 @@
 
 {# Archivos #}
 {% load static %} <!-- STATIC_URL -->
+  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'eatnnovationApp/css/styles.css' %}">
+    <title>Eatnnovation</title>
+    
+</head> 
+<body>
+    <div class="hero">
 
-<style>
-  body {
-    background-color: white;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'poppins', sans-serif;
-  }
+        <nav>
+           
+            <img src="{% static 'eatnnovationApp/img/logo.png' %}" class="logo"  >
+            
 
-  .contenedor {
-    margin: 0 auto;
-    margin-top: 20px;
-    max-width: 1200px;
-    background-color: #d9f688;
-    padding: 20px;
-    border-radius: 20px;
-    border: 1px solid black;
-  }
-
-  nav{
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-}
-nav .logo{
-    width: 150px;
-    cursor: pointer;
-}
-nav .menu-img{
-    width: 40px;
-    cursor: pointer;
-}
-nav ul{
-    flex: 1;
-    text-align: right;
-    margin-right: 150px;
-
-}
-nav ul li{
-    list-style: none;
-    display: inline-block;
-    margin: 10px 30px;
-}
-nav ul li a{
-    text-decoration: none;
-    color:#000;
-    font-weight: 700;
-    position: relative;
-    padding: 10px;
-}
-nav ul li a::before{
-    content: '';
-    width: 100%;
-    height: 0px;
-    background: #d9f688;
-    position: absolute;
-    z-index: -1;
-    left: 0;
-    bottom: -5px;
-    border-bottom-left-radius: 8px ;
-    border-bottom-right-radius: 8px;
-    transition: height 0.5s;
-
-}
-nav ul li a:hover::before{
-    height: 85px;
-}
-
-
-
-  </style>
-
-</head>
-
+            <ul>
+                <li><a href="{% url 'productList' %}">Products</a></li>
+                <li><a href="">Users</a></li>
+                <li><a href="{% url 'menu' %}">Menu</a></li>   
+                {% if user.is_authenticated %}  
+                <li>
+                  <a href="{% url 'logout' %}">Logout</a>
+                </li>
+                <li> 
+                    <a href="#">@{{user.username}} </a>
+                </li>
+                {% else %} 
+                <li>
+                    <a href="{% url 'login' %}">Login</a>
+                  </li>
+                {% endif %}
+            </ul>
+            <a href="{% url 'home' %}"> <img src="{% static 'eatnnovationApp/img/home.png' %}" class="menu-img" >
+            </a>
+            
+            
+        </nav>
 <body>
 
 
-  {% block contenido %}
  
 
   <div class="contenedor">
@@ -140,5 +104,10 @@ nav ul li a:hover::before{
       <a href="create" type="button" class="btn btn-success">Add</a> <!-- Boton create -->
     </div>
   </div>
+  
+  <footer>
+    <p> Lilian Estefania Maradiago, Nicolas Gonzales y Camilo Roman Castiblanco</p>
+</footer>
 
-{% endblock %}
+</html>
+

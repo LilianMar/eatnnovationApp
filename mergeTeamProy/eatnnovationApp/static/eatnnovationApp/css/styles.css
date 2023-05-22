@@ -108,3 +108,85 @@ nav ul li a:hover::before{
 
 }
 
+body {
+    background-color: white;
+}
+
+.add-info {
+    margin: 0 auto;
+    margin-top: 15px;
+    max-width: 900px;
+    background-color: #d9f688;
+    padding: 15px;
+    border-radius: 20px;
+    border: 1px solid black;
+}
+
+body {
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'poppins', sans-serif;
+  }
+
+  .contenedor {
+    margin: 0 auto;
+    margin-top: 20px;
+    max-width: 1200px;
+    background-color: #d9f688;
+    padding: 20px;
+    border-radius: 20px;
+    border: 1px solid black;
+  }
+
+  nav{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+nav .logo{
+    width: 150px;
+    cursor: pointer;
+}
+nav .menu-img{
+    width: 40px;
+    cursor: pointer;
+}
+nav ul{
+    flex: 1;
+    text-align: right;
+    margin-right: 150px;
+
+}
+nav ul li{
+    list-style: none;
+    display: inline-block;
+    margin: 10px 30px;
+}
+nav ul li a{
+    text-decoration: none;
+    color:#000;
+    font-weight: 700;
+    position: relative;
+    padding: 10px;
+}
+nav ul li a::before{
+    content: '';
+    width: 100%;
+    height: 0px;
+    background: #d9f688;
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    bottom: -5px;
+    border-bottom-left-radius: 8px ;
+    border-bottom-right-radius: 8px;
+    transition: height 0.5s;
+
+}
+nav ul li a:hover::before{
+    height: 85px;
+}

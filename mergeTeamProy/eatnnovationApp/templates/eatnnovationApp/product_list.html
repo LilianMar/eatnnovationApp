@@ -1,0 +1,75 @@
+{% extends 'eatnnovationApp/base.html' %}
+{# Cargamos la librería #}
+{% load bootstrap4 %}
+
+{# CSS Bootstrap #}
+{% bootstrap_css %} 
+
+{# Archivos #}
+{% load static %} <!-- STATIC_URL -->
+
+{% block contenido %}
+
+<head>
+  <link rel="stylesheet" type="text/css" href="{% static 'eatnnovationApp/css/styleMenu.css' %}">
+</head>
+
+<body>
+
+  <h2>Products</h2>
+  
+  <div class="contenedor">
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th width="15%">Name</th>
+          <th width="15%">Category</th>
+          <th witdh="35">Description</th>
+          <th>Price</th>
+          <th>Image</th>
+          <th>Available</th>
+          <th>Options</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <!-- Recorremos los objetos o registros que tenemos en nuestra tabla 'products' y los listamos -->
+        {% for products in object_list %}
+        <tr>
+          <td>{{ products.name }}</td>
+          <td>{{ products.category }}</td>
+          <td>{{ products.description }}</td>
+          <td>{{ products.price }}</td>
+          {% if products.img %}
+          <td><img src="{{products.img.url}}" alt="{{products.name}}" class="img-fluid" width="50%">
+            {% endif %}
+          </td>
+          <td>{{ products.availableCant }}</td>
+          <td>
+
+            <!-- Usaremos un formulario que realizará la tarea de eliminar un registro o product desde la misma tabla HTML -->
+            <form method="POST" action="delete/{{products.id}}">
+              {% csrf_token %}
+              <div class="btn-group">
+
+                <!-- Botones de Mostrar, Editar y Eliminar-->
+                <a href="detail/{{products.id}}" title="Show" type="button" class="btn btn-success">Show </a>
+                <a href="edit/{{products.id}}" title="Edit" type="button" class="btn btn-primary">Edit </a>
+                <button class="btn btn-danger" onclick="return eliminar();" type="submit">Delete</button>
+              </div>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+
+      </tbody>
+    </table>
+    {# JS y jQuery Bootstrap #}
+    {% bootstrap_javascript jquery='full' %}
+
+    <div align="center" class="btn-crear mb-3">
+      <a href="{% url 'createProduct' %}" type="button" class="btn btn-success">Add</a> <!-- Boton create -->
+    </div>
+  </div>
+
+  {% endblock %}

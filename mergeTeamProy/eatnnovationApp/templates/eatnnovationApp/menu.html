@@ -76,7 +76,7 @@
                         <th>Price</th>
                         <th>Image</th>
                         <th>Available</th>
-                        <th>Selection </th>
+                       
                     </tr>
                 </thead>
                 <tbody>
@@ -91,9 +91,7 @@
                             {% endif %}
                         </td>
                         <td>{{ product.availableCant }}</td>
-                        <td>
-                            <input type="number" name="quantity_{{ product.id }}" min="0" max="{{ product.availableCant }}">
-                        </td>
+                       
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -102,13 +100,13 @@
             
 
         </div>
-        {% if user.is_authenticated %}
-        <br>
-        <button type="submit" class="btn btn-success">Save and continue</button>
-        {% else %}
-        <h4>Log in to order</h4>
-        {% endif %}
+        <div class="col">
+          <a href="{% url 'orders' %}">Order now!</a>
+        </div>
+          
     </form>
+
+    
     
     {# JS y jQuery Bootstrap #}
     {% bootstrap_javascript jquery='full' %}

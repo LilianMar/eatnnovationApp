@@ -1,0 +1,30 @@
+{% extends 'eatnnovationApp/base.html' %}
+
+{% block contenido %}
+    <h2>Order Confirmation</h2>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in products %}
+                <tr>
+                    <td>{{ product.product.name }}</td>
+                    <td>{{ product.quantity }}</td>
+                    <td>${{ product.product.price }}</td>
+                    <td>${{ product.subtotal }}</td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <th colspan="3">Total Amount:</th>
+                <td>${{ total_amount }}</td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}

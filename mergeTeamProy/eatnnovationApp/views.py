@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Product
+from .models import Product,Sale, Invoice
 from django.contrib.auth import get_user_model
 from django.views.generic import ListView, DetailView 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -135,3 +135,49 @@ class UserDelete(SuccessMessageMixin, DeleteView):
         messages.success (self.request, (success_message))       
         return reverse('userList') # Redireccionamos a la vista principal 'leer'  
     
+
+
+def select_products(request):
+    if request.method == 'POST':
+        selected_products = []
+        total_quantity = int(request.POST.get('total_quantity', 0))
+        
+        for i in range(1, total_quantity + 1):
+            product_id = request.POST.get(f'product_id_{i}')
+            quantity = int(request.POST.get(f'quantity_{i}', 0))
+            
+            if product_id and quantity > 0:
+                product = Product.objects.get(id=product_id)
+                selected_products.append({'product': product, 'quantity': quantity})
+        
+        context = {
+            'selected_products': selected_products,
+            'user': request.user,
+        }
+        return render(request, 'eatnnovationApp/order_confirmation.html', context)
+    else:
+        products = Product.objects.all()
+        context = {'object_list': products}
+        return render(request, 'eatnnovationApp/orders.html', context)
+
+def order_confirmation(request):
+    if request.method == 'POST':
+        selected_products = []
+        total_amount = 0
+
+        for i, (product_id, quantity) in enumerate(request.POST.items()):
+            if product_id.startswith('quantity_') and quantity.isdigit():
+                product_id = product_id.split('_')[1]
+                product = Product.objects.get(id=product_id)
+                quantity = int(quantity)
+                subtotal = product.price * quantity
+                total_amount += subtotal
+                selected_products.append({'product': product, 'quantity': quantity, 'subtotal': subtotal})
+
+        context = {
+            'products': selected_products,
+            'total_amount': total_amount,
+        }
+        return render(request, 'eatnnovationApp/order_confirmation.html', context)
+    else:
+        return redirect('select_products')

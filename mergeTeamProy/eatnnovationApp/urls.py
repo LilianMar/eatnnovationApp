@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import home,Menu,registro
+from .views import home,Menu,registro,order_confirmation
 from  eatnnovationApp.views import ProductCreate,ProductDelete,ProductDetail,ProductList,ProductUpdate
 from  eatnnovationApp.views import UserList,UserDetail, UserCreate, UserUpdate, UserDelete
 
@@ -30,5 +30,7 @@ urlpatterns = [
     # La ruta 'delete' que usaremos para delete un Products o registro de la Base de Datos 
     path('userList/delete/<int:pk>', UserDelete.as_view(), name='deleteUser'),
 
-   
+
+   path('orders/', Menu.as_view(template_name = "eatnnovationApp/orders.html"), name='orders'),
+   path('order_confirmation/', order_confirmation, name='order_confirmation'),
 ]

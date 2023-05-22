@@ -1,6 +1,7 @@
 from django.urls import path
-from .views import home, Menu, registro, SaveOrderView, OrderConfirmationView
+from .views import home, Menu, registro, order_confirmation
 from  eatnnovationApp.views import ProductCreate,ProductDelete,ProductDetail,ProductList,ProductUpdate
+from  eatnnovationApp.views import UserList,UserDetail, UserCreate, UserUpdate, UserDelete
 
 
 urlpatterns = [
@@ -18,10 +19,19 @@ urlpatterns = [
     # La ruta 'delete' que usaremos para delete un Products o registro de la Base de Datos 
     path('productList/delete/<int:pk>', ProductDelete.as_view(), name='deleteProduct'),
 
+    path('userList/', UserList.as_view(template_name = "eatnnovationApp/user_list.html"), name='userList'),
+    path('userList/detail/<int:pk>', UserDetail.as_view(template_name = "eatnnovationApp/detail_user.html"), name='detailUser'),
+    # La ruta 'create' en donde mostraremos un formulario para create un nuevo Products o registro  
+    path('userList/create', UserCreate.as_view(template_name = "eatnnovationApp/create_user.html"), name='createUser'),
+    # La ruta 'actualizar' en donde mostraremos un formulario para actualizar un Products o registro de la Base de Datos 
+    path('userList/edit/<int:pk>', UserUpdate.as_view(template_name = "eatnnovationApp/update_user.html"), name='updateUser'), 
+    # La ruta 'delete' que usaremos para delete un Products o registro de la Base de Datos 
+    path('userList/delete/<int:pk>', UserDelete.as_view(), name='deleteUser'),
+
+
     path('registro/', registro, name='registro'),
     path('orders/', Menu.as_view(template_name = "eatnnovationApp/orders.html"), name='orders'),
-    path('factura/', SaveOrderView.as_view(), name='factura'),
-    path('order_confirmation/', OrderConfirmationView.as_view(), name='order_confirmation'),
+    path('order_confirmation/', order_confirmation, name='order_confirmation'),
 
 
 

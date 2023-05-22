@@ -1,0 +1,72 @@
+<head>
+ 
+    {# Cargamos la librería #} 
+    {% load bootstrap4 %} 
+  
+    {# CSS Bootstrap #} 
+    {% bootstrap_css %} 
+
+    {# Widget Tweaks #}
+    {% load widget_tweaks %}
+
+    {# Archivos #}
+    {% load static %} <!-- STATIC_URL -->
+  
+    <style>
+
+      body {
+          background-color: white;
+      }
+
+      .add-info {
+          margin: 0 auto;
+          margin-top: 15px;
+          max-width: 900px;
+          background-color: #d9f688;
+          padding: 15px;
+          border-radius: 20px;
+          border: 1px solid black;
+      }
+
+  </style>
+
+</head>
+<body>
+
+  <div class="add-info">
+    <h4>Edit User</h4>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      
+      <!-- {{ form.as_p }} -->
+      <div class="form-group">
+        <label for="username" class="txt_negrita">Username</label>
+        {{ form.username|add_class:"form-control" }} <!-- Usamos la librería 'widget_tweaks' para crear esta caja de texto -->
+      </div>
+      <div class="form-group">
+        <label for="email" class="txt_negrita">Email</label>
+        {{ form.email|add_class:"form-control" }}
+      </div>
+      <div class="form-group">
+        <label for="password" class="txt_negrita">Password</label>
+        {{ form.password|add_class:"form-control" }}
+      </div>
+      
+      <div class="form-group">
+          <label for="is_staff" class="txt_negrita">Is staff?</label>
+          {{ form.is_staff|add_class:"form-control" }}
+      </div>    
+      <div class="form-group">
+        <label for="is_superuser" class="txt_negrita">Is superuser?</label>
+        {{ form.is_superuser|add_class:"form-control" }}
+    </div>  
+     
+      <button type="submit" class="btn btn-success">Accept</button>
+      <a href="../" type="submit" class="btn btn-danger">Back</a>
+  </div>
+       
+    </form>      
+    {# JS y jQuery Bootstrap #}
+    {% bootstrap_javascript jquery='full' %} 
+
+</body>

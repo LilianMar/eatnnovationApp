@@ -14,7 +14,8 @@
 
 <h2>Select products</h2>
 
-<form method="POST" action="{% url 'factura' %}">
+<form method="POST" action="{% url 'order_confirmation' %}">
+    <input type="hidden" name="total_quantity" value="{{ selected_products|length }}">
     {% csrf_token %}
 
     {% for item in selected_products %}

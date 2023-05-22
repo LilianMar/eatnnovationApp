@@ -30,5 +30,5 @@ urlpatterns = [
     # La ruta 'delete' que usaremos para delete un Products o registro de la Base de Datos 
     path('userList/delete/<int:pk>', UserDelete.as_view(), name='deleteUser'),
 
-
+   
 ]

@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
 ]
 
+
 X_FRAM_OPTIONS='SAMEORIGIN'
 
 MIDDLEWARE = [
@@ -58,6 +59,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 ROOT_URLCONF = 'mergeTeamProy.urls'
 
 TEMPLATES = [

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Product
 from django.views.generic import ListView, DetailView 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -8,6 +8,8 @@ from django.urls import reverse
 from django.contrib import messages
 #Habilitamos los mensajes para class-based views 
 from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth import authenticate, login
+from .forms import CustomUserCreationForm
 
 
 # Create your views here.
@@ -15,12 +17,7 @@ def home (request):
     return render(request, 'eatnnovationApp/home.html')
 
 def menu (request):
-    productos = Product.objects.all()
-    data = {
-        'productos' : productos
-    }
-
-    return render(request, 'eatnnovationApp/menu.html', data)
+    return render(request, 'eatnnovationApp/menu.html')
 
 class Menu (ListView):
     model = Product 
@@ -62,4 +59,23 @@ class ProductDelete(SuccessMessageMixin, DeleteView):
         success_message = 'Product deleted Succesfully !' # Mostramos este Mensaje luego de Editar un Product 
         messages.success (self.request, (success_message))       
         return reverse('productList') # Redireccionamos a la vista principal 'leer'  
+    
+
+def registro(request):
+    data = {
+        'form' : CustomUserCreationForm
+    }
+
+    if request.method == 'POST':
+        formulario = CustomUserCreationForm(data=request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            user = authenticate(username=formulario.cleaned_data["username"],password=formulario.cleaned_data["password1"])
+            login(request, user)
+            messages.success(request, "Te has registrado correctamente")
+            return redirect(reverse('home'))
+        data['form'] = formulario
+
+
+    return render(request, 'registration/registro.html', data)
     

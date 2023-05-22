@@ -1,5 +1,3 @@
-<head>
-  
 
   {# Cargamos la librería #}
   {% load bootstrap4 %}
@@ -24,33 +22,36 @@
 <body>
     <div class="hero">
 
-        <nav>
+      <nav>
            
-            <img src="{% static 'eatnnovationApp/img/logo.png' %}" class="logo"  >
-            
+        <img src="{% static 'eatnnovationApp/img/logo.png' %}" class="logo"  >
+        
 
-            <ul>
-                <li><a href="{% url 'productList' %}">Products</a></li>
-                <li><a href="">Users</a></li>
-                <li><a href="{% url 'menu' %}">Menu</a></li>   
-                {% if user.is_authenticated %}  
-                <li>
-                  <a href="{% url 'logout' %}">Logout</a>
-                </li>
-                <li> 
-                    <a href="#">@{{user.username}} </a>
-                </li>
-                {% else %} 
-                <li>
-                    <a href="{% url 'login' %}">Login</a>
-                  </li>
-                {% endif %}
-            </ul>
-            <a href="{% url 'home' %}"> <img src="{% static 'eatnnovationApp/img/home.png' %}" class="menu-img" >
-            </a>
+        <ul>
+            {% if user.is_authenticated and user.is_staff %}
+            <li><a href="{% url 'productList' %}">Products</a></li>
+            <li><a href="{% url 'userList' %}">Users</a></li>
+            {% endif %}
             
-            
-        </nav>
+            <li><a href="{% url 'menu' %}">Menu</a></li>   
+            {% if user.is_authenticated  %}  
+            <li>
+              <a href="{% url 'logout' %}">Logout</a>
+            </li>
+            <li> 
+                <a href="#">@{{user.username}} </a>
+            </li>
+            {% else %} 
+            <li>
+                <a href="{% url 'login' %}">Login</a>
+              </li>
+            {% endif %}
+        </ul>
+        <a href="{% url 'home' %}"> <img src="{% static 'eatnnovationApp/img/home.png' %}" class="menu-img" >
+        </a>
+        
+        
+    </nav>
 <body>
 
 

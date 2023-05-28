@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Product,Sale, Invoice
+from .models import Product, Invoice, Category
 from django.contrib.auth import get_user_model
 from django.views.generic import ListView, DetailView 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -174,6 +174,10 @@ def order_confirmation(request):
                 total_amount += subtotal
                 selected_products.append({'product': product, 'quantity': quantity, 'subtotal': subtotal})
 
+        user = request.user
+        invoice = Invoice(user=user, total_amount=total_amount)
+        invoice.save()
+
         context = {
             'products': selected_products,
             'total_amount': total_amount,
@@ -181,3 +185,50 @@ def order_confirmation(request):
         return render(request, 'eatnnovationApp/order_confirmation.html', context)
     else:
         return redirect('select_products')
+    
+
+     
+    
+@method_decorator(user_passes_test(is_staff), name='dispatch')
+class CategoryList(ListView):
+    model = Category 
+
+@method_decorator(user_passes_test(is_staff), name='dispatch')
+class CategoryCreate(SuccessMessageMixin, CreateView): 
+    model = Category # Llamamos a la clase User que se encuentra en nuestro archivo 'models.py'
+    form = Category # Definimos nuestro formulario con el nombre de la clase o modelo User
+    fields = "__all__" # Le decimos a Django que muestre todos los campos de la tabla users de nuestra Base de Datos 
+    success_message = 'Category Created Succesfully!' # Mostramos este Mensaje luego de Crear un Product
+
+    # Redireccionamos a la página principal luego de crear un registro o User
+    def get_success_url(self):        
+        return reverse('categoryList')
+    
+@method_decorator(user_passes_test(is_staff), name='dispatch')
+class CategoryUpdate(SuccessMessageMixin, UpdateView): 
+    model = Category # Llamamos a la clase 'Product' que se encuentra en nuestro archivo 'models.py' 
+    form = Category # Definimos nuestro formulario con el nombre de la clase o modelo 'Product' 
+    fields = "__all__" # Le decimos a Django que muestre todos los campos de la tabla 'products' de nuestra Base de Datos 
+    success_message = 'Category Updated Succesfully !' # Mostramos este Mensaje luego de Editar un Product 
+
+    # Redireccionamos a la página principal luego de actualizar un registro o Product
+    def get_success_url(self):               
+        return reverse('categoryList') # Redireccionamos a la vista principal 'leer'
+
+@method_decorator(user_passes_test(is_staff), name='dispatch')
+class CategoryDelete(SuccessMessageMixin, DeleteView): 
+    model = Category 
+    form = Category
+    fields = "__all__"     
+
+    # Redireccionamos a la página principal luego de eliminar un registro o Product
+    def get_success_url(self): 
+        success_message = 'Category deleted Succesfully !' # Mostramos este Mensaje luego de Editar un Product 
+        messages.success (self.request, (success_message))       
+        return reverse('categoryList') # Redireccionamos a la vista principal 'leer'      
+    
+@method_decorator(user_passes_test(is_staff), name='dispatch')
+class InvoiceList(ListView):
+    model = Invoice
+
+

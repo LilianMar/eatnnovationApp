@@ -2,7 +2,7 @@ from django.urls import path
 from .views import home,Menu,registro,order_confirmation
 from  eatnnovationApp.views import ProductCreate,ProductDelete,ProductDetail,ProductList,ProductUpdate
 from  eatnnovationApp.views import UserList,UserDetail, UserCreate, UserUpdate, UserDelete
-
+from  eatnnovationApp.views import CategoryCreate,CategoryList,CategoryUpdate,CategoryDelete,InvoiceList
 urlpatterns = [
     path('', home, name="home"),
     path('registro/', registro, name='registro'),
@@ -30,7 +30,13 @@ urlpatterns = [
     # La ruta 'delete' que usaremos para delete un Products o registro de la Base de Datos 
     path('userList/delete/<int:pk>', UserDelete.as_view(), name='deleteUser'),
 
+    path('categoryList/', CategoryList.as_view(template_name = "eatnnovationApp/category_list.html"), name='categoryList'),
+    path('categoryList/create', CategoryCreate.as_view(template_name = "eatnnovationApp/create_category.html"), name='createCategory'),
+    path('categoryList/edit/<int:pk>', CategoryUpdate.as_view(template_name = "eatnnovationApp/update_category.html"), name='updateCategory'), 
+    path('categoryList/delete/<int:pk>', CategoryDelete.as_view(), name='deleteCategory'),
 
-   path('orders/', Menu.as_view(template_name = "eatnnovationApp/orders.html"), name='orders'),
-   path('order_confirmation/', order_confirmation, name='order_confirmation'),
+    path('invoiceList/', InvoiceList.as_view(template_name = "eatnnovationApp/invoice_list.html"), name='invoiceList'),
+
+    path('orders/', Menu.as_view(template_name = "eatnnovationApp/orders.html"), name='orders'),
+    path('order_confirmation/', order_confirmation, name='order_confirmation'),
 ]

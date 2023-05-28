@@ -1,73 +1,71 @@
-<head>
- 
-    {# Cargamos la librería #} 
-    {% load bootstrap4 %} 
-  
-    {# CSS Bootstrap #} 
-    {% bootstrap_css %} 
+{# Cargamos la librería #} 
+{% load bootstrap4 %} 
 
-    {# Widget Tweaks #}
-    {% load widget_tweaks %}
+{# CSS Bootstrap #} 
+{% bootstrap_css %} 
 
-    {# Archivos #}
-    {% load static %} <!-- STATIC_URL -->
-  
-    <style>
-        body {
-            background-color: white;
-        }
+{# Widget Tweaks #}
+{% load widget_tweaks %}
 
-        .add-info {
-            margin: 0 auto;
-            margin-top: 15px;
-            max-width: 900px;
-            background-color: #d9f688;
-            padding: 15px;
-            border-radius: 20px;
-            border: 1px solid black;
-        }
+{# Archivos #}
+{% load static %} <!-- STATIC_URL -->
 
-    </style>
+<style>
+    body {
+        background-color: white;
+    }
 
-</head>
+    .add-info {
+        margin: 0 auto;
+        margin-top: 15px;
+        max-width: 750px;
+        background-color: #d9f688;
+        padding: 15px;
+        border-radius: 20px;
+        border: 1px solid black;
+    }
+
+</style>
+
 <body>
 
-    <div class="add-info">
-        <h4>Edit Product</h4>
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            
-            <!-- {{ form.as_p }} -->
-            <div class="form-group">
-                <label for="name" class="txt_negrita">Product Name</label>
-                {{ form.name|add_class:"form-control" }} <!-- Usamos la librería 'widget_tweaks' para crear esta caja de texto -->
-            </div>
-            <div class="form-group">
-                <label for="description" class="txt_negrita">Description</label>
-                {{ form.description|add_class:"form-control" }} <!-- Usamos la librería 'widget_tweaks' para crear esta caja de texto -->
-            </div>
-            <div class="form-group">
-                <label for="price" class="txt_negrita">Price</label>
-                {{ form.price|add_class:"form-control" }} <!-- Usamos la librería 'widget_tweaks' para crear esta caja de texto --> 
-            </div>
-            <div class="form-group">
-                <label for="img" class="txt_negrita">Image</label>
-                {{ form.img|add_class:"form-control mb-3" }} <!-- Usamos la librería 'widget_tweaks' para crear esta caja de texto -->
-            </div>
-            <div class="form-group">
-                <label for="availableCant" class="txt_negrita">Available</label>
-                {{ form.availableCant|add_class:"form-control" }} <!-- Usamos la librería 'widget_tweaks' para crear esta caja de texto -->
-            </div>
-           
-            <button type="submit" class="btn btn-success">Accept</button>
-            <a href="../" type="submit" class="btn btn-danger">Back</a>
-    </div>
+<div class="add-info">
+    <h4>Edit Product</h4>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <!-- {{ form.as_p }} -->
+        <div class="form-group">
+            <label for="name" class="txt_negrita">Product Name</label>
+            {{ form.name|add_class:"form-control" }} <!-- Usamos la librería 'widget_tweaks' para crear esta caja de texto -->
+        </div>
+        <div class="form-group">
+            <label for="category" class="txt_negrita"> Category</label>
+            {{ form.category|add_class:"form-control" }} 
+        </div>
+        <div class="form-group">
+            <label for="description" class="txt_negrita">Description</label>
+            {{ form.description|add_class:"form-control" }} <!-- Usamos la librería 'widget_tweaks' para crear esta caja de texto -->
+        </div>
+        <div class="form-group">
+            <label for="price" class="txt_negrita">Price</label>
+            {{ form.price|add_class:"form-control" }} <!-- Usamos la librería 'widget_tweaks' para crear esta caja de texto --> 
+        </div>
+        <div class="form-group">
+            <label for="img" class="txt_negrita">Image</label>
+            {{ form.img|add_class:"form-control mb-3" }} <!-- Usamos la librería 'widget_tweaks' para crear esta caja de texto -->
+        </div>
+        <div class="form-group">
+            <label for="availableCant" class="txt_negrita">Available</label>
+            {{ form.availableCant|add_class:"form-control" }} <!-- Usamos la librería 'widget_tweaks' para crear esta caja de texto -->
+        </div>
        
-      </form>      
-    {# JS y jQuery Bootstrap #}
-    {% bootstrap_javascript jquery='full' %} 
+        <button type="submit" class="btn btn-success">Accept</button>
+        <a href="../" type="submit" class="btn btn-danger">Back</a>
+</div>
+   
+  </form>      
+{# JS y jQuery Bootstrap #}
+{% bootstrap_javascript jquery='full' %} 
 
 </body>
-
-
-

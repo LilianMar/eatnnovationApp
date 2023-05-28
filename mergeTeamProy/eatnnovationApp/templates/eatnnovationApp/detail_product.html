@@ -21,7 +21,8 @@
         .mirar-info {
             margin: 0 auto;
             margin-top: 15px;
-            max-width: 700px;
+            text-align: center;
+            max-width: 400px;
             background-color: #d9f688;
             padding: 15px;
             border-radius: 20px;
@@ -36,6 +37,7 @@
         <h2>Product Details</h2>
  
         <p><span class="txt_negrita">Product Name:</span> <br> {{object.name}}</p>
+        <p><span class="txt_negrita">Category:</span> <br> {{object.category}}</p>
         <p><span class="txt_negrita">Description:</span> <br> {{object.description}}</p>
         <p><span class="txt_negrita">Price:</span> <br> {{object.price}}</p>
         {% if object.img %}

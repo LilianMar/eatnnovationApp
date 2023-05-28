@@ -21,6 +21,8 @@
                 {% if user.is_authenticated and user.is_staff %}
                 <li><a href="{% url 'productList' %}">Products</a></li>
                 <li><a href="{% url 'userList' %}">Users</a></li>
+                <li><a href="{% url 'categoryList' %}">Categories</a></li>
+                <li><a href="{% url 'invoiceList' %}">Invoices</a></li>
                 {% endif %}
                 
                 <li><a href="{% url 'menu' %}">Menu</a></li>   
@@ -60,6 +62,8 @@
 </body>
 
 <footer>
+    <br>
+    <br>
     <p> Lilian Estefania Maradiago, Nicolas Gonzales y Camilo Roman Castiblanco</p>
 </footer>
 

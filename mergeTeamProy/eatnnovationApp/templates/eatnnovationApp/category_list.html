@@ -15,7 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'eatnnovationApp/css/styles.css' %}">
-    <title>Users</title>
+    <title>Categories</title>
     
 </head> 
 <body>
@@ -57,37 +57,26 @@
 
 
   <div class="contenedor">
-    <h2>users</h2>
+    <h2>Categories</h2>
     <table class="table table-striped table-hover">
       <thead>
         <tr>
-          <th width="15%">Username</th>
-          <th width="15%">Superuser</th>
-          <th>Staff</th>
-          <th>Email</th>
+          <th width="15%">Name</th>
           <th>Options</th>
         </tr>
       </thead>
       <tbody>
 
         <!-- Recorremos los objetos o registros que tenemos en nuestra tabla 'users' y los listamos -->
-        {% for users in object_list %}
+        {% for categories in object_list %}
         <tr>
-          <td>{{ users.username }}</td>
-          <td>{{ users.is_superuser }}</td>
-          <td>{{ users.is_staff }}</td>
-          </td>
-          <td>{{ users.email }}</td>
-          <td>
+          <td>{{ categories.name }}</td>
 
             <!-- Usaremos un formulario que realizará la tarea de eliminar un registro o product desde la misma tabla HTML -->
-            <form method="POST" action="delete/{{users.id}}">
+            <form method="POST" action="delete/{{categories.id}}">
               {% csrf_token %}
               <div class="btn-group">
-
-                <!-- Botones de Mostrar, Editar y Eliminar-->
-                <a href="detail/{{users.id}}" title="Show" type="button" class="btn btn-success">Show </a>
-                <a href="edit/{{users.id}}" title="Edit" type="button" class="btn btn-primary">Edit </a>
+                <a href="edit/{{categories.id}}" title="Edit" type="button" class="btn btn-primary">Edit </a>
                 <button class="btn btn-danger" onclick="return eliminar();" type="submit">Delete</button>
               </div>
             </form>

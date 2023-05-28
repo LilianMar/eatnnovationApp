@@ -36,28 +36,10 @@
         {% csrf_token %}
 
         <div class="form-group">
-            <label for="username" class="txt_negrita">User Name</label>
-            {{ form.username|add_class:"form-control" }}
+            <label for="name" class="txt_negrita">Category name</label>
+            {{ form.name|add_class:"form-control" }}
           </div>
-          <div class="form-group">
-            <label for="email" class="txt_negrita">Email</label>
-            {{ form.email|add_class:"form-control" }}
-          </div>
-          <div class="form-group">
-            <label for="password" class="txt_negrita">Password</label>
-            {{ form.password|add_class:"form-control" }}
-          </div>
-          
-          <div class="form-group">
-              <label for="is_staff" class="txt_negrita">Is staff?</label>
-              {{ form.is_staff|add_class:"form-control" }}
-          </div>
-          <div class="form-group">
-            <label for="is_superuser" class="txt_negrita">Is superuser?</label>
-            {{ form.is_superuser|add_class:"form-control" }}
-        </div>  
-
-    
+        
         
           <button type="submit" class="btn btn-success">Accept</button>
           <a href="{% url 'home' %}" class="btn btn-danger">Cancel</a>

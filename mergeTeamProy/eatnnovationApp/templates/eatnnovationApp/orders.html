@@ -24,10 +24,12 @@
                         <th width="15%">Name</th>
                         <th width="15%">Category</th>
                         <th witdh="35">Description</th>
+                        <th></th>
                         <th>Price</th>
                         <th>Image</th>
                         <th>Available</th>
-                        <th>Quantity</th>
+                        <th></th>
+                        <th>Your selection</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -40,6 +42,7 @@
                             <td>{{ product.name | title }}</td>
                             <td>{{ product.category }}</td>
                             <td>{{ product.description | capfirst }}</td>
+                            <td></td>
                             <td>${{ product.price | intcomma }}</td>
                             {% if product.img %}
                                 <td>
@@ -47,6 +50,7 @@
                                 </td>
                             {% endif %}
                             <td>{{ product.availableCant }}</td>
+                            <td></td>
                             <td>
                                 <input type="number" name="quantity_{{ product.id }}" min="0" max="{{ product.availableCant }}">
                             </td>
@@ -57,10 +61,11 @@
         </div>
         {% if user.is_authenticated %}
             <br>
-            <button type="submit" class="btn btn-primary">Save and continue</button>
+            <button type="submit" class="btn-crear">Save and continue</button>
         {% else %}
             <h4>Log in to order</h4>
         {% endif %}
+        
     </form>
 
     {# JS y jQuery Bootstrap #}

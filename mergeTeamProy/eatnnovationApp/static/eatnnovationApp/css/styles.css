@@ -1,11 +1,17 @@
-*_ {
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'poppins', sans-serif;
-
 }
 
+body {
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'poppins', sans-serif;
+}
 
 .hero {
     height: 100vh;
@@ -14,13 +20,11 @@
     background-position: center;
 }
 
-
-nav {
+.nav {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-
 }
 
 nav .logo {
@@ -28,29 +32,24 @@ nav .logo {
     cursor: pointer;
 }
 
-nav .menu-img {
+.nav .menu-img {
     width: 40px;
     cursor: pointer;
 }
 
-nav ul {
+nav .ul {
     flex: 1;
     text-align: right;
     margin-right: 150px;
-
 }
 
-.nav li a:hover {
-    text-decoration: none;
-  }
-
-nav ul li {
+nav .ul li {
     list-style: none;
     display: inline-block;
     margin: 10px 30px;
 }
 
-.nav ul li a {
+nav .ul li a {
     text-decoration: none;
     color: #000;
     font-weight: 700;
@@ -58,7 +57,7 @@ nav ul li {
     padding: 10px;
 }
 
-nav ul li a::before {
+nav .ul li a::before {
     content: '';
     width: 100%;
     height: 0px;
@@ -70,10 +69,9 @@ nav ul li a::before {
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
     transition: height 0.5s;
-
 }
 
-nav ul li a:hover::before {
+nav .ul li a:hover::before {
     height: 85px;
 }
 
@@ -90,7 +88,6 @@ nav ul li a:hover::before {
 .feature-img {
     width: 100%;
     margin-top: 10px;
-
 }
 
 .thumbnail-img {
@@ -100,15 +97,12 @@ nav ul li a:hover::before {
     left: 0;
     border-radius: 8px;
     box-shadow: 5px 8px 10px rgba(0, 0, 0, 0.1);
-
-
 }
 
 .col h1 {
     margin-top: 180px;
     font-size: 40px;
     font-weight: 600;
-
 }
 
 .col a {
@@ -121,6 +115,30 @@ nav ul li a:hover::before {
     font-weight: 700;
     margin-top: 70px;
     box-shadow: 5px 8px 10px rgba(0, 0, 0, 0.1);
+}
 
+.add-info {
+    margin: 0 auto;
+    margin-top: 15px;
+    max-width: 900px;
+    background-color: #d9f688;
+    padding: 15px;
+    border-radius: 20px;
+    border: 1px solid black;
+}
 
+.contenedor {
+    margin: 0 auto;
+    margin-top: 20px;
+    max-width: 1200px;
+    background-color: #d9f688;
+    padding: 20px;
+    border-radius: 20px;
+    border: 1px solid black;
+}
+
+.btn.btn-success {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
 }

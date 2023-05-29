@@ -20,10 +20,13 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
+    # Ruta para el Administrador de Django
     path('admin/', admin.site.urls),
+    # Ruta para nuestro archivo de urls.py en eatnnovationApp
     path('', include('eatnnovationApp.urls')),
+    # Ruta para el login de usuario con dJango
     path('accounts/', include('django.contrib.auth.urls')),
 ]
-
+# Para crear la ruta static
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

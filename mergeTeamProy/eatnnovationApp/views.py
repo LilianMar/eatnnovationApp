@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
+# Import de nuestros modelos
 from .models import Product , Invoice , Category
+#Import de nuestras vistas
 from django.views.generic import ListView, DetailView 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 #Nos sirve para redireccionar despues de una acción revertiendo patrones de expresiones regulares 
@@ -14,19 +16,24 @@ from .forms import CustomUserCreationForm
 from django.contrib.auth.decorators import user_passes_test
 from django.utils.decorators import method_decorator
 
+# Autenticación de usuario Staff
 def is_staff(user):
     return user.is_authenticated and user.is_staff
-# Create your views here.
+
+# Vista para el home
 def home (request):
     return render(request, 'eatnnovationApp/home.html')
 
+# Vista para el menú
 def menu (request):
     return render(request, 'eatnnovationApp/menu.html')
+
+# Vistas para el modelo Productos
 
 class Menu (ListView):
     model = Product 
 
-
+# Uso de decoradores para la autenticación en productos
 @method_decorator(user_passes_test(is_staff), name='dispatch')
 class ProductList(ListView):
     model = Product 
@@ -67,10 +74,13 @@ class ProductDelete(SuccessMessageMixin, DeleteView):
     def get_success_url(self): 
         success_message = 'Product deleted Succesfully !' # Mostramos este Mensaje luego de Editar un Product 
         messages.success (self.request, (success_message))       
-        return reverse('productList') # Redireccionamos a la vista principal 'leer'      
+        return reverse('productList') # Redireccionamos a la vista principal 'leer'   
+
+# Vistas para el modelo Usuarios   
 
 User = get_user_model()
 
+# Uso de decoradores para la autenticación en usuarios
 @method_decorator(user_passes_test(is_staff), name='dispatch')
 class UserList(ListView):
     model = User 
@@ -113,7 +123,7 @@ class UserDelete(SuccessMessageMixin, DeleteView):
         messages.success (self.request, (success_message))       
         return reverse('userList') # Redireccionamos a la vista principal 'leer'  
     
-
+# Para hacer el registro con ayuda de Django admin y se sube en la base de datos
 def registro(request):
     data = {
         'form' : CustomUserCreationForm
@@ -129,10 +139,9 @@ def registro(request):
             return redirect(reverse('home'))
         data['form'] = formulario
 
-
     return render(request, 'registration/registro.html', data)
 
-
+# Para que se guarde la cantidad de productos que se van seleccionando en el Order Now
 def select_products(request):
     if request.method == 'POST':
         selected_products = []
@@ -156,6 +165,7 @@ def select_products(request):
         context = {'object_list': products}
         return render(request, 'eatnnovationApp/orders.html', context)
 
+# Se guarda la información de la factura en la base de datos
 def order_confirmation(request):
     if request.method == 'POST':
         selected_products = []
@@ -170,7 +180,6 @@ def order_confirmation(request):
                 total_amount += subtotal
                 selected_products.append({'product': product, 'quantity': quantity, 'subtotal': subtotal})
 
-                # Restar la cantidad seleccionada del producto
                 product.availableCant -= quantity
                 product.save()
 
@@ -185,8 +194,10 @@ def order_confirmation(request):
         return render(request, 'eatnnovationApp/order_confirmation.html', context)
     else:
         return redirect('select_products')
+    
+#Vistas para el modelo Categorías
 
-
+# Uso de decoradores para la autenticación en categorías
 @method_decorator(user_passes_test(is_staff), name='dispatch')
 class CategoryList(ListView):
     model = Category 

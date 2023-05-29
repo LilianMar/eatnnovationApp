@@ -71,7 +71,7 @@ nav .ul li a::before {
     transition: height 0.5s;
 }
 
-nav .ul li a:hover::before {
+nav .ul .li a:hover::before {
     height: 85px;
 }
 
@@ -99,13 +99,13 @@ nav .ul li a:hover::before {
     box-shadow: 5px 8px 10px rgba(0, 0, 0, 0.1);
 }
 
-.col h1 {
+.col .h1 {
     margin-top: 180px;
     font-size: 40px;
     font-weight: 600;
 }
 
-.col a {
+.col .a {
     text-decoration: none;
     padding: 18px 50px;
     border-radius: 30px;

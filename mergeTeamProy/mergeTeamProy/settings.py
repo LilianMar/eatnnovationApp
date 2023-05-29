@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
+# Se crea nuestra app (eatnnovationApp), y se añaden otras para ayudar al funcionamiento y estilos
+
 INSTALLED_APPS = [
     'admin_interface',
     'django.contrib.admin',

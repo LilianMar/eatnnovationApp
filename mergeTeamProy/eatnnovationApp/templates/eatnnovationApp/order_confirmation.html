@@ -1,0 +1,76 @@
+{% extends 'eatnnovationApp/base.html' %}
+
+{% load static %}
+{% load humanize %}
+{% load widget_tweaks %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% block contenido %}
+
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'eatnnovationApp/css/styleInvoice.css' %}">
+    <style>
+        .btn-crear {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .btn-crear input[type="submit"],
+        .btn-crear a {
+            padding: 10px 20px;
+            border-radius: 30px;
+            border: #000;
+            background: #d9f688;
+            display: inline-block;
+            color: #000;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 5px 8px 10px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+        }
+
+        .btn-crear input[type="submit"]:hover {
+            background: #c5e84f;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Order Confirmation</h2>
+    <div class="contenedor">
+        <table>
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                <tr>
+                    <td>{{ product.product.name }}</td>
+                    <td>{{ product.quantity }}</td>
+                    <td>${{ product.product.price | intcomma }}</td>
+                    <td>${{ product.subtotal | intcomma }}</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <th colspan="3">Total Amount:</th>
+                    <td>${{ total_amount | intcomma }}</td>
+                </tr>
+
+                <tr>
+                    <th colspan="3">Username:</th>
+                    <td>{{ user.username }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+<div class="btn-crear">
+    <a href="{% url 'home' %}">Finish</a>
+</div>
+{% endblock %}

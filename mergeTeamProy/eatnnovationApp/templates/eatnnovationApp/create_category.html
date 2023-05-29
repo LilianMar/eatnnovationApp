@@ -1,0 +1,52 @@
+{# Cargamos la librería #} 
+    {% load bootstrap4 %} 
+  
+    {# CSS Bootstrap #} 
+    {% bootstrap_css %} 
+  
+    {# Widget Tweaks #}
+    {% load widget_tweaks %}
+  
+    {# Archivos #}
+    {% load static %} <!-- STATIC_URL -->
+  
+    <style>
+
+      body {
+          background-color: white;
+      }
+
+      .add-info {
+          margin: 0 auto;
+          margin-top: 15px;
+          max-width: 900px;
+          background-color: #d9f688;
+          padding: 15px;
+          border-radius: 20px;
+          border: 1px solid black;
+      }
+
+  </style>
+
+  <body>
+  
+    <div class="add-info">
+      <form method="post"  enctype="multipart/form-data">
+
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="name" class="txt_negrita">Category name</label>
+            {{ form.name|add_class:"form-control" }}
+          </div>
+        
+        
+          <button type="submit" class="btn btn-success">Accept</button>
+          <a href="{% url 'home' %}" class="btn btn-danger">Cancel</a>
+    </div>
+        
+    </form>
+    {# JS y jQuery Bootstrap #}
+    {% bootstrap_javascript jquery='full' %} 
+  
+  </body>

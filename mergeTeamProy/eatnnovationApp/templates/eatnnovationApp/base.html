@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'eatnnovationApp/css/styles.css' %}">
+    <title>Eatnnovation</title>
+</head>
+
+<body>
+    <div class="hero">
+        <nav>
+            <img src="{% static 'eatnnovationApp/img/logo.png' %}" class="logo">
+
+            <ul>
+                {% if user.is_authenticated and user.is_staff %}
+                <li><a href="{% url 'productList' %}">Products</a></li>
+                <li><a href="{% url 'userList' %}">Users</a></li>
+                <li><a href="{% url 'categoryList' %}">Categories</a></li>
+                <li><a href="{% url 'invoiceList' %}">Invoices</a></li>
+                {% endif %}
+
+                <li><a href="{% url 'menu' %}">Menu</a></li>
+                {% if user.is_authenticated %}
+                <li>
+                    <a href="{% url 'logout' %}">Logout</a>
+                </li>
+                <li>
+                    <a href="#">@{{user.username}} </a>
+                </li>
+                {% else %}
+                <li>
+                    <a href="{% url 'login' %}">Login</a>
+                </li>
+                {% endif %}
+            </ul>
+            <a href="{% url 'home' %}"> <img src="{% static 'eatnnovationApp/img/home.png' %}" class="menu-img">
+            </a>
+        </nav>
+
+        <div id="contenido">
+
+            {% block contenido %}
+
+            {% endblock %}
+
+        </div>
+    </div>
+</body>
+
+</html>

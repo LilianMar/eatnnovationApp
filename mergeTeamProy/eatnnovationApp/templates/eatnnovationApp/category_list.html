@@ -1,0 +1,103 @@
+{# Cargamos la librería #}
+{% load bootstrap4 %}
+
+{# CSS Bootstrap #}
+{% bootstrap_css %}
+
+{# Archivos #}
+{% load static %} <!-- STATIC_URL -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'eatnnovationApp/css/styles.css' %}">
+  <title>Categories</title>
+
+</head>
+
+<body>
+  <div class="hero">
+
+    <nav>
+
+      <img src="{% static 'eatnnovationApp/img/logo.png' %}" class="logo">
+
+
+      <ul>
+        {% if user.is_authenticated and user.is_staff %}
+        <li><a href="{% url 'productList' %}">Products</a></li>
+        <li><a href="{% url 'userList' %}">Users</a></li>
+        <li><a href="{% url 'categoryList' %}">Categories</a></li>
+        <li><a href="{% url 'invoiceList' %}">Invoices</a></li>
+        {% endif %}
+
+        <li><a href="{% url 'menu' %}">Menu</a></li>
+        {% if user.is_authenticated %}
+        <li>
+          <a href="{% url 'logout' %}">Logout</a>
+        </li>
+        <li>
+          <a href="#">@{{user.username}} </a>
+        </li>
+        {% else %}
+        <li>
+          <a href="{% url 'login' %}">Login</a>
+        </li>
+        {% endif %}
+      </ul>
+      <a href="{% url 'home' %}"> <img src="{% static 'eatnnovationApp/img/home.png' %}" class="menu-img">
+      </a>
+
+
+    </nav>
+
+    <body>
+
+
+      <div class="contenedor">
+        <h2>Categories</h2>
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th width="15%">Name</th>
+              <th>Options</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <!-- Recorremos los objetos o registros que tenemos en nuestra tabla 'users' y los listamos -->
+            {% for category in object_list %}
+            <tr>
+              <td>{{ category.name }}</td>
+              <td>
+                <div class="btn-group">
+                  <a href="edit/{{ category.id }}" title="Edit" type="button" class="btn btn-primary">Edit</a>
+                  <form method="POST" action="delete/{{ category.id }}">
+                    {% csrf_token %}
+                    <button class="btn btn-danger" onclick="return eliminar();" type="submit">Delete</button>
+                  </form>
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+
+          </tbody>
+        </table>
+        {# JS y jQuery Bootstrap #}
+        {% bootstrap_javascript jquery='full' %}
+
+        <div align="center" class="btn-crear mb-3">
+          <a href="create" type="button" class="btn btn-success">Add</a> <!-- Boton create -->
+        </div>
+      </div>
+
+      <footer>
+        <p> Lilian Estefanía Maradiago, Nicolás González y Camilo Román </p>
+      </footer>
+
+</html>

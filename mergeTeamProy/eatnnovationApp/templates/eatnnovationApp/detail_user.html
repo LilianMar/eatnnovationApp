@@ -1,0 +1,45 @@
+{# Cargamos la librería #} 
+    {% load bootstrap4 %} 
+  
+    {# CSS Bootstrap #} 
+    {% bootstrap_css %} 
+
+    {# Widget Tweaks #}
+    {% load widget_tweaks %}
+
+    {# Archivos #}
+    {% load static %} <!-- STATIC_URL -->
+  
+    <style>
+
+        body {
+            background-color: white;
+        }
+
+        .mirar-info {
+            margin: 0 auto;
+            margin-top: 15px;
+            max-width: 700px;
+            background-color: #d9f688;
+            padding: 15px;
+            border-radius: 20px;
+            border: 1px solid black;
+        }
+
+    </style>
+
+<body>
+    <div class="mirar-info">
+        <h4>User Details</h4>
+ 
+    <p><span class="txt_negrita">Id:</span> <br> {{object.id}}</p>
+    <p><span class="txt_negrita">Name:</span> <br> {{object.name}}</p>
+    <p><span class="txt_negrita">Email:</span> <br> {{object.email}}</p>
+    <p><span class="txt_negrita">Role:</span> <br> {{object.role}}</p>
+    
+    <a href="../" type="submit" class="btn btn-primary">Back</a>
+    </div>
+
+    {# JS y jQuery Bootstrap #}
+    {% bootstrap_javascript jquery='full' %} 
+</body>

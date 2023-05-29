@@ -28,6 +28,7 @@ class Meta:
 class Invoice(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     total_amount = models.DecimalField(max_digits=10, decimal_places=2)
-    
+    date = models.DateField(auto_now_add=True)
+
 class Meta:
      db_table = 'invoices'     

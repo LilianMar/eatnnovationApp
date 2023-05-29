@@ -13,6 +13,7 @@ from django.contrib.auth import authenticate, login
 from .forms import CustomUserCreationForm
 from django.contrib.auth.decorators import user_passes_test
 from django.utils.decorators import method_decorator
+from django.utils import timezone
 
 
 def is_staff(user):
@@ -175,7 +176,7 @@ def order_confirmation(request):
                 selected_products.append({'product': product, 'quantity': quantity, 'subtotal': subtotal})
 
         user = request.user
-        invoice = Invoice(user=user, total_amount=total_amount)
+        invoice = Invoice(user=user, total_amount=total_amount, date=timezone.now())
         invoice.save()
 
         context = {
